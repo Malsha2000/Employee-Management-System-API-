@@ -23,7 +23,7 @@ const addEmployee = async (req, res) => {
 				.send({ message: "Employee already exist" });
 		} 
 
-		// write the code to encrypt the password
+		//encrypt the password
 		const salt = await bcryptjs.genSalt(5);
         const hashPassword = await bcryptjs.hash(
             req.body.password,
@@ -70,9 +70,6 @@ const getEmployee = async (req, res) => {
 };
 
 const updateEmployee = async (req, res) => {
-	const validate = localStorage.getItem("isAdmin");
-
-	if (validate == "true") {
 		const employeeId = req.params.id;
 
 		try {
@@ -82,7 +79,7 @@ const updateEmployee = async (req, res) => {
 			}
 
 			const {
-				empID,
+				
 				firstName,
 				lastName,
 				email,
@@ -90,10 +87,10 @@ const updateEmployee = async (req, res) => {
 				NIC,
                 address,
                 position,
-				password,
-			} = req.body.data;
+				
+			} = req.body;
 			const updatedEmployee = await Employee.findByIdAndUpdate(employeeId, {
-				empID,
+				
 				firstName,
 				lastName,
 				email,
@@ -101,18 +98,13 @@ const updateEmployee = async (req, res) => {
 				NIC,
                 address,
                 position,
-				password,
+				
 			});
 
 			res.status(200).json(updatedEmployee);
 		} catch (err) {
 			res.status(400).send({ message: err });
 		}
-	} else {
-		return res
-			.status(403)
-			.json("You do not have permission to access this");
-	}
 };
 
 const deleteEmployee = async (req, res) => {

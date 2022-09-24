@@ -1,4 +1,3 @@
-//const Admin = require("../model/SystemAdminModel");
 const bcryptjs = require("bcryptjs");
 const Employee = require("../model/EmployeeModel");
 const jwt = require("jsonwebtoken");

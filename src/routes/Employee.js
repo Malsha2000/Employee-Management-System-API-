@@ -11,9 +11,9 @@ const Employee = require("../model/EmployeeModel");
 
 //define user routes
 router.post("/add",verifyToken, addEmployee);
-router.get("/all", verifyToken, getEmployee);
+router.post("/all", verifyToken, getEmployee);
 router.put("/update/:id", updateEmployee);
-router.delete("/delete/:id", verifyToken, deleteEmployee);
+router.delete("/delete/:id", deleteEmployee);
 router.get("/:id",   getoneEmployee);
 
 module.exports = router;
